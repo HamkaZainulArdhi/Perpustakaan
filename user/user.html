@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CRUD Form</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background-color: #ecf0f5;
+      }
+
+      /* Gambar latar belakang */
+      .background-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 200px; /* Tinggi gambar di atas */
+        z-index: -1;
+        background: url("/img/perpus.jpg") no-repeat center/cover;
+      }
+
+      .sidebar {
+        width: 250px;
+        height: calc(90vh + 50px); /* Sidebar lebih tinggi dari viewport */
+        margin-top: 5rem;
+        position: sticky;
+        top: 0;
+        background-color: #ffffff;
+        padding: 20px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+        border-radius: 8px;
+        z-index: 1;
+      }
+
+      .sidebar .logo {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .sidebar .logo img {
+        width: 10rem;
+      }
+
+      .sidebar .user-info {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .sidebar .user-info small {
+        display: block;
+        color: gray;
+      }
+
+      .sidebar a {
+        display: block;
+        color: #000;
+        text-decoration: none;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      .sidebar a:hover {
+        background-color: #e9ecef;
+      }
+
+      .content {
+        margin: 20px;
+        margin-top: 10rem;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        z-index: 2;
+      }
+
+      .form-control {
+        border: none;
+        border-bottom: 2px solid #ccc;
+        border-radius: 0;
+        box-shadow: none;
+        outline: none;
+      }
+
+      .form-control:focus {
+        border-bottom: 2px solid #ff0800;
+        outline: none;
+        box-shadow: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Gambar Latar Belakang -->
+    <div class="background-image"></div>
+
+    <div class="d-flex">
+      <div class="sidebar">
+        <div class="logo">
+          <img src="/img/logo.png" alt="Logo" />
+        </div>
+        <div class="user-info">
+          <strong>2311103156</strong>
+          <small>Hamka Zainul Ardhi</small>
+        </div>
+        <h5 class="text-danger">Student Menu</h5>
+        <a href="#" class="d-flex align-items-center">
+          <svg
+            width="18"
+            height="18"
+            fill="currentColor"
+            class="bi bi-house me-2"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 .134l6 6V15a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6.134l6-6zm5 6.236L8 1.134 3 6.37v8.63h10V6.37z"
+            />
+          </svg>
+          Beranda
+        </a>
+        <a href="#" class="d-flex align-items-center">
+          <svg
+            width="18"
+            height="18"
+            fill="currentColor"
+            class="bi bi-plus-circle me-2"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8 1a7 7 0 1 1 0 14A7 7 0 0 1 8 1zM8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm4 7a.5.5 0 0 1-.5.5H8.5v3.5a.5.5 0 0 1-1 0V7.5H4a.5.5 0 0 1 0-1h3.5V3a.5.5 0 0 1 1 0v3.5h3.5a.5.5 0 0 1 .5.5z"
+            />
+          </svg>
+          Masukan TAK
+        </a>
+        <a href="#" class="d-flex align-items-center">
+          <svg
+            width="18"
+            height="18"
+            fill="currentColor"
+            class="bi bi-folder me-2"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M9.828 4a2 2 0 0 1 1.828 1h3.344a1 1 0 0 1 1 1V12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h4.344A2 2 0 0 1 9.828 4z"
+            />
+          </svg>
+          Riwayat Masukan
+        </a>
+      </div>
+
+      <div class="content border">
+        <h3 class="mb-4">Formulir Masukan</h3>
+        <form>
+          <div class="mb-3">
+            <label for="nim" class="form-label">Judul Buku</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nim"
+              placeholder="Tulis Judul Buku"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="name" class="form-label">Penulis</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Tulis Penulis"
+              id="name"
+            />
+          </div>
+
+          <div class="row">
+            <!-- <div class="col-md-4">
+              <label for="start-date" class="form-label">Jenis Buku</label>
+              <input type="date" class="form-control" id="start-date" />
+            </div>
+            <div class="col-md-4">
+              <label for="end-date" class="form-label">Tanggal Selesai</label>
+              <input type="date" class="form-control" id="end-date" />
+            </div> -->
+            <div class="col-md-6">
+              <label for="academic-year" class="form-label">Jenis Buku</label>
+              <select class="form-select" id="academic-year">
+                <option selected>Jenis Buku</option>
+                <option value="">Novel</option>
+                <option value="">Komik</option>
+                <option value="">Self Improvment</option>
+                <option value="">Buku anak</option>
+                <option value="">Filsafat</option>
+                <option value="">Sejarah</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="file-upload" class="form-label"
+                >Unggah Foto Buku</label
+              >
+              <input class="form-control" type="file" id="file-upload" />
+              <small class="form-text text-muted"
+                >File: .jpg, .png, .pdf dengan maksimal 2 MB.</small
+              >
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <label for="category" class="form-label">Ketersedian</label>
+              <select class="form-select" id="category">
+                <option selected>Ketersedian</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="1">3</option>
+                <option value="2">4</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="activity-level" class="form-label"
+                >Tingkat Kegiatan</label
+              >
+              <select class="form-select" id="activity-level">
+                <option selected>Pilih tingkat kegiatan</option>
+                <option value="1">Lokal</option>
+                <option value="2">Nasional</option>
+                <option value="3">Internasional</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3 mt-3">
+            <label for="description" class="form-label">Deskripsi</label>
+            <textarea class="form-control" id="description" rows="3"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="organizer" class="form-label">Penyelenggara</label>
+            <input type="text" class="form-control" id="organizer" />
+          </div>
+
+          <div class="mb-3">
+            <label for="activity-name" class="form-label">Nama Kegiatan</label>
+            <input type="text" class="form-control" id="activity-name" />
+          </div>
+
+          <div class="mb-3">
+            <label for="activity-name-en" class="form-label"
+              >Nama Kegiatan (Inggris)</label
+            >
+            <input type="text" class="form-control" id="activity-name-en" />
+          </div>
+
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="agree" />
+            <label class="form-check-label" for="agree">
+              Dengan ini menyatakan bahwa data yang saya unggah sudah sesuai.
+              Apabila terdapat kesalahan, saya siap mendapatkan sanksi.
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Simpan</button>
+          <button type="reset" class="btn btn-secondary">Atur Ulang</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
