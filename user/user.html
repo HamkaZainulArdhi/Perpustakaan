@@ -268,8 +268,122 @@
           <button type="reset" class="btn btn-secondary">Atur Ulang</button>
         </form>
       </div>
+      <div class="content border">
+        <h3 class="mb-4">Formulir Masukan</h3>
+        <form>
+          <div class="mb-3">
+            <label for="nim" class="form-label">Judul Buku</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nim"
+              placeholder="Tulis Judul Buku"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label for="name" class="form-label">Penulis</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Tulis Penulis"
+              id="name"
+            />
+          </div>
+
+          <div class="row">
+            <!-- <div class="col-md-4">
+              <label for="start-date" class="form-label">Jenis Buku</label>
+              <input type="date" class="form-control" id="start-date" />
+            </div>
+            <div class="col-md-4">
+              <label for="end-date" class="form-label">Tanggal Selesai</label>
+              <input type="date" class="form-control" id="end-date" />
+            </div> -->
+            <div class="col-md-6">
+              <label for="academic-year" class="form-label">Jenis Buku</label>
+              <select class="form-select" id="academic-year">
+                <option selected>Jenis Buku</option>
+                <option value="">Novel</option>
+                <option value="">Komik</option>
+                <option value="">Self Improvment</option>
+                <option value="">Buku anak</option>
+                <option value="">Filsafat</option>
+                <option value="">Sejarah</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="file-upload" class="form-label"
+                >Unggah Foto Buku</label
+              >
+              <input class="form-control" type="file" id="file-upload" />
+              <small class="form-text text-muted"
+                >File: .jpg, .png, .pdf dengan maksimal 2 MB.</small
+              >
+            </div>
+          </div>
+
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <label for="category" class="form-label">Ketersedian</label>
+              <select class="form-select" id="category">
+                <option selected>Ketersedian</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="1">3</option>
+                <option value="2">4</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="activity-level" class="form-label"
+                >Tingkat Kegiatan</label
+              >
+              <select class="form-select" id="activity-level">
+                <option selected>Pilih tingkat kegiatan</option>
+                <option value="1">Lokal</option>
+                <option value="2">Nasional</option>
+                <option value="3">Internasional</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3 mt-3">
+            <label for="description" class="form-label">Deskripsi</label>
+            <textarea class="form-control" id="description" rows="3"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="organizer" class="form-label">Penyelenggara</label>
+            <input type="text" class="form-control" id="organizer" />
+          </div>
+
+          <div class="mb-3">
+            <label for="activity-name" class="form-label">Nama Kegiatan</label>
+            <input type="text" class="form-control" id="activity-name" />
+          </div>
+
+          <div class="mb-3">
+            <label for="activity-name-en" class="form-label"
+              >Nama Kegiatan (Inggris)</label
+            >
+            <input type="text" class="form-control" id="activity-name-en" />
+          </div>
+
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" id="agree" />
+            <label class="form-check-label" for="agree">
+              Dengan ini menyatakan bahwa data yang saya unggah sudah sesuai.
+              Apabila terdapat kesalahan, saya siap mendapatkan sanksi.
+            </label>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Simpan</button>
+          <button type="reset" class="btn btn-secondary">Atur Ulang</button>
+        </form>
+      </div>
     </div>
 
+    <script src="belajar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
