@@ -80,25 +80,19 @@
       .content {
         margin: 20px;
         margin-top: 10rem;
+        width: 62.3rem;
         padding: 1.5rem;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        background-color: #fff;
+        background-color: #ffffff;
         z-index: 2;
       }
 
-      .form-control {
-        border: none;
-        border-bottom: 2px solid #ccc;
-        border-radius: 0;
-        box-shadow: none;
-        outline: none;
-      }
-
-      .form-control:focus {
-        border-bottom: 2px solid #ff0800;
-        outline: none;
-        box-shadow: none;
+      .namakolom {
+        font-size: 1em;
+        text-align: center;
+        background-color: rgb(167, 0, 250);
+        z-index: 0;
       }
     </style>
   </head>
@@ -160,95 +154,77 @@
         </a>
       </div>
 
-      <div class="content border">
-        <h3 class="mb-4">Formulir Masukan</h3>
-        <form>
-          <div class="mb-3">
-            <label for="nim" class="form-label">Judul Buku</label>
-            <input
-              type="text"
-              class="form-control"
-              id="nim"
-              placeholder="Tulis Judul Buku"
-            />
-          </div>
+      <!-- MASUKAN KODE TABEL YANG MEMUAT NOMOR AUTO INCREMEN, AKSI (UBAH HAPUS) POTO
+      BUKU, NAMA BUKU, JUDUL BUKU, JENIS BUKU, STOK DAN DESKRIPSI, UNTUK
+      MENERIMA DATA YANG AKAN DI KIRIM NNTINYA TAMBAHKAN KODE NYA DISNI JANGAN
+      UBAH KODE SEMULA NYA -->
 
-          <div class="mb-3">
-            <label for="name" class="form-label">Penulis</label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Tulis Penulis"
-              id="name"
-            />
-          </div>
-
-          <div class="row">
-            <!-- <div class="col-md-4">
-              <label for="start-date" class="form-label">Jenis Buku</label>
-              <input type="date" class="form-control" id="start-date" />
-            </div>
-            <div class="col-md-4">
-              <label for="end-date" class="form-label">Tanggal Selesai</label>
-              <input type="date" class="form-control" id="end-date" />
-            </div> -->
-            <div class="col-md-6">
-              <label for="academic-year" class="form-label">Jenis Buku</label>
-              <select class="form-select" id="academic-year">
-                <option selected>Jenis Buku</option>
-                <option value="">Novel</option>
-                <option value="">Komik</option>
-                <option value="">Self Improvment</option>
-                <option value="">Buku anak</option>
-                <option value="">Filsafat</option>
-                <option value="">Sejarah</option>
-              </select>
-            </div>
-            <div class="col-md-6">
-              <label for="file-upload" class="form-label"
-                >Unggah Foto Buku</label
-              >
-              <input class="form-control" type="file" id="file-upload" />
-              <small class="form-text text-muted"
-                >File: .jpg, .png, .pdf dengan maksimal 2 MB.</small
-              >
-            </div>
-          </div>
-
-          <div class="row mt-3">
-            <div class="col-md-6">
-              <label for="category" class="form-label">Ketersedian</label>
-              <select class="form-select" id="category">
-                <option selected>Ketersedian</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="1">3</option>
-                <option value="2">4</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="mb-3 mt-3">
-            <label for="description" class="form-label">Deskripsi</label>
-            <textarea class="form-control" id="description" rows="3"></textarea>
-          </div>
-
-          <!-- <div class="mb-3">
-            <label for="organizer" class="form-label">Penyelenggara</label>
-            <input type="text" class="form-control" id="organizer" />
-          </div> -->
-
-          <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" id="agree" />
-            <label class="form-check-label" for="agree">
-              Dengan ini menyatakan bahwa data yang saya unggah sudah sesuai.
-              Apabila terdapat kesalahan, saya siap mendapatkan sanksi.
-            </label>
-          </div>
-
-          <button type="submit" class="btn btn-primary">Simpan</button>
-          <button type="reset" class="btn btn-secondary">Atur Ulang</button>
-        </form>
+      <div class="content">
+        <h2 class="text-black text-start mb-4">Data Buku</h2>
+        <div class="table-responsive rounded-top-4">
+          <table class="table table-striped-columns">
+            <thead class="table-danger">
+              <tr class="text-white namakolom">
+                <th>No.</th>
+                <th>Foto Buku</th>
+                <th style="width: 120px">Nama Buku</th>
+                <th>Judul Buku</th>
+                <th>Jenis</th>
+                <th>Stok</th>
+                <th>Deskripsi</th>
+                <th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody class="isikolom border-bottom border-dark-subtle">
+              <tr>
+                <td>1</td>
+                <td>
+                  <img
+                    src="/img/logo.png"
+                    alt="Foto Buku"
+                    class="rounded"
+                    style="width: 100px; height: auto"
+                  />
+                </td>
+                <td>Harry Potter</td>
+                <td>Harry Potter and the Philosopher's Stone</td>
+                <td>Fiksi</td>
+                <td>12</td>
+                <td>Buku tentang dunia sihir yang penuh petualangan.</td>
+                <td>
+                  <div class="d-flex mt-2">
+                    <button class="btn btn-sm btn-warning me-2">Ubah</button>
+                    <button class="btn btn-sm btn-danger">Hapus</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            <tbody class="isikolom">
+              <tr>
+                <td>1</td>
+                <td>
+                  <img
+                    src="/img/logo.png"
+                    alt="Foto Buku"
+                    class="rounded"
+                    style="width: 100px; height: auto"
+                  />
+                </td>
+                <td>Harry Potter</td>
+                <td>Harry Potter and the Philosopher's Stone</td>
+                <td>Fiksi</td>
+                <td>12</td>
+                <td>Buku tentang dunia sihir yang penuh petualangan.</td>
+                <td>
+                  <div class="d-flex mt-2">
+                    <button class="btn btn-sm btn-warning me-2">Ubah</button>
+                    <button class="btn btn-sm btn-danger">Hapus</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
