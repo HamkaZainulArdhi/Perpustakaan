@@ -80,6 +80,7 @@
       .content {
         margin: 20px;
         margin-top: 10rem;
+        width: 62.3rem;
         padding: 1.5rem;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -109,53 +110,22 @@
     <div class="d-flex">
       <div class="sidebar">
         <div class="logo">
-          <img src="/img/logo.png" alt="Logo" />
+          <img src="/maraca/img/logo.png" alt="Logo" />
         </div>
         <div class="user-info">
-          <strong>2311103156</strong>
-          <small>Hamka Zainul Ardhi</small>
+          <strong>MARACA BUKU</strong>
+          <small>Komunitas Literasi Desa Bangbayang</small>
         </div>
-        <h5 class="text-danger">Student Menu</h5>
-        <a href="#" class="d-flex align-items-center">
-          <svg
-            width="18"
-            height="18"
-            fill="currentColor"
-            class="bi bi-house me-2"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8 .134l6 6V15a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6.134l6-6zm5 6.236L8 1.134 3 6.37v8.63h10V6.37z"
-            />
-          </svg>
-          Beranda
+        <h5 class="text-danger">Admin Menu</h5>
+        <a href="#" class="d-flex align-items-center gap-2">
+          <i class="bi bi-houses"></i>Beranda
         </a>
-        <a href="#" class="d-flex align-items-center">
-          <svg
-            width="18"
-            height="18"
-            fill="currentColor"
-            class="bi bi-plus-circle me-2"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M8 1a7 7 0 1 1 0 14A7 7 0 0 1 8 1zM8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm4 7a.5.5 0 0 1-.5.5H8.5v3.5a.5.5 0 0 1-1 0V7.5H4a.5.5 0 0 1 0-1h3.5V3a.5.5 0 0 1 1 0v3.5h3.5a.5.5 0 0 1 .5.5z"
-            />
-          </svg>
+        <a href="user.php" class="d-flex align-items-center gap-2">
+          <i class="bi bi-folder-plus"></i>
           Masukan TAK
         </a>
-        <a href="riwayat.html" class="d-flex align-items-center">
-          <svg
-            width="18"
-            height="18"
-            fill="currentColor"
-            class="bi bi-folder me-2"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M9.828 4a2 2 0 0 1 1.828 1h3.344a1 1 0 0 1 1 1V12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h4.344A2 2 0 0 1 9.828 4z"
-            />
-          </svg>
+        <a href="riwayat.php" class="d-flex align-items-center gap-2">
+          <i class="bi bi-journal-check"></i>
           Riwayat Masukan
         </a>
       </div>
