@@ -37,4 +37,26 @@ function registrasi($data) {
     // hash pasword
 
 
+
+    // tambah
+    function tambah($data) {
+      global $db;
+
+      $judul_buku = htmlspecialchars($data["judul"]);
+      $penulis_buku = htmlspecialchars($data["penulis"]);
+      $jenis_buku = htmlspecialchars($data["jenis"]);
+      $ketersedian = htmlspecialchars($data["ketersedian"]);
+      $deskripsi_buku = htmlspecialchars($data["deskripsi"]);
+      $gambar_buku = htmlspecialchars($data["gambar"]);
+      
+      
+
+      $query = "INSERT INTO buku 
+                VALUES ( '', '$judul_buku', '$penulis_buku', '$jenis_buku', '$ketersedian', '$deskripsi_buku', '$gambar_buku')";
+      mysqli_query($db, $query);
+
+      return mysqli_affected_rows($db);
+
+      
+    }
 ?>

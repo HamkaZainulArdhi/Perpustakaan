@@ -1,3 +1,34 @@
+<?php 
+require '../query.php';
+
+$error = "";
+
+if (isset($_POST["simpan"])){
+  if (!isset($_POST['agree'])) {
+        $error = "Anda harus mencentang persetujuan sebelum menyimpan.";
+  } else {
+    if (tambah($_POST) > 0) {
+  echo "
+  <script>
+    alert ('Data berhasil di tambahkan');
+    document.location.href = 'pertemuan8.php';
+  </script>
+  ";
+ } else {
+  echo "
+  <script>
+    alert ('Data berhasil di tambahkan');
+    document.location.href = 'pertemuan8.php';
+  </script>
+  ";
+ }
+
+
+}
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -28,7 +59,7 @@
         width: 100%;
         height: 200px; /* Tinggi gambar di atas */
         z-index: -1;
-        background: url("/img/perpus.jpg") no-repeat center/cover;
+        background: url("/MARACA/img/perpus.jpg") no-repeat center/cover;
       }
 
       .sidebar {
@@ -132,24 +163,24 @@
 
       <div class="content border">
         <h3 class="mb-4">Formulir Masukan</h3>
-        <form>
+        <form action="" method="post">
           <div class="mb-3">
-            <label for="nim" class="form-label">Judul Buku</label>
+            <label class="form-label">Judul Buku</label>
             <input
               type="text"
               class="form-control"
-              id="nim"
+              name="judul"
               placeholder="Tulis Judul Buku"
             />
           </div>
 
           <div class="mb-3">
-            <label for="name" class="form-label">Penulis</label>
+            <label class="form-label">Penulis</label>
             <input
               type="text"
               class="form-control"
               placeholder="Tulis Penulis"
-              id="name"
+              name="penulis"
             />
           </div>
 
@@ -163,22 +194,22 @@
               <input type="date" class="form-control" id="end-date" />
             </div> -->
             <div class="col-md-6">
-              <label for="academic-year" class="form-label">Jenis Buku</label>
-              <select class="form-select" id="academic-year">
+              <label class="form-label">Jenis Buku</label>
+              <select class="form-select" name="jenis">
                 <option selected>Jenis Buku</option>
-                <option value="">Novel</option>
-                <option value="">Komik</option>
-                <option value="">Self Improvment</option>
-                <option value="">Buku anak</option>
-                <option value="">Filsafat</option>
-                <option value="">Sejarah</option>
+                <option value="Novel">Novel</option>
+                <option value="Komik">Komik</option>
+                <option value="Self Improvment">Self Improvment</option>
+                <option value="Buku anak">Buku anak</option>
+                <option value="Filsafat">Filsafat</option>
+                <option value="Sejarah">Sejarah</option>
               </select>
             </div>
             <div class="col-md-6">
-              <label for="file-upload" class="form-label"
+              <label class="form-label"
                 >Unggah Foto Buku</label
               >
-              <input class="form-control" type="file" id="file-upload" />
+              <input class="form-control" type="text" name="gambar" />
               <small class="form-text text-muted"
                 >File: .jpg, .png, .pdf dengan maksimal 2 MB.</small
               >
@@ -187,20 +218,20 @@
 
           <div class="row mt-3">
             <div class="col-md-6">
-              <label for="category" class="form-label">Ketersedian</label>
-              <select class="form-select" id="category">
+              <label class="form-label">Ketersedian</label>
+              <select class="form-select" name="ketersedian">
                 <option selected>Ketersedian</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
-                <option value="1">3</option>
-                <option value="2">4</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
               </select>
             </div>
           </div>
 
           <div class="mb-3 mt-3">
-            <label for="description" class="form-label">Deskripsi</label>
-            <textarea class="form-control" id="description" rows="3"></textarea>
+            <label class="form-label">Deskripsi</label>
+            <textarea class="form-control" name="deskripsi" rows="3"></textarea>
           </div>
 
           <!-- <div class="mb-3">
@@ -209,20 +240,23 @@
           </div> -->
 
           <div class="form-check mb-3">
-            <input class="form-check-input" type="checkbox" id="agree" />
-            <label class="form-check-label" for="agree">
+            <input class="form-check-input" type="checkbox" name="agree" />
+            <label class="form-check-label">
               Dengan ini menyatakan bahwa data yang saya unggah sudah sesuai.
               Apabila terdapat kesalahan, saya siap mendapatkan sanksi.
             </label>
+            <?php if ($error) : ?>
+             <div style="color: red;"><?php echo $error; ?></div>
+            <?php endif; ?>
           </div>
 
-          <button type="submit" class="btn btn-primary">Simpan</button>
-          <button type="reset" class="btn btn-secondary">Atur Ulang</button>
+          <button type="submit" class="btn btn-primary" name="simpan">Simpan</button>
+          <button type="reset" class="btn btn-secondary" name="atur ulang">Atur Ulang</button>
         </form>
       </div>
     </div>
 
-    <script src="belajar.js"></script>
+   
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

@@ -155,7 +155,7 @@
               <tr class="text-white namakolom">
                 <th>No.</th>
                 <th>Foto Buku</th>
-                <th style="width: 120px">Nama Buku</th>
+                <th style="width: 120px">Penulis</th>
                 <th>Judul Buku</th>
                 <th>Jenis</th>
                 <th>Stok</th>
