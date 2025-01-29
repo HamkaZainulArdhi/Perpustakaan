@@ -1,3 +1,39 @@
+<?php 
+require '../query.php';
+$buku = query ("SELECT * FROM buku ORDER BY Id DESC");
+
+
+if (isset($_POST["cari"])) {
+  $buku = cari($_POST["keyword"]);
+
+}
+
+if (isset($_POST["submit"])) {
+
+  // cek keberhasilan apakah data berhasil di tambahkan
+ if( ubah($_POST) > 0) {
+  echo "
+  <script>
+    alert ('Data berhasil diubah');
+    document.location.href = 'index.php';
+  </script>
+  ";
+ } else {
+  echo "
+  <script>
+    alert ('Data gagal diubah');
+    document.location.href = 'index.php';
+  </script>
+  ";
+ }
+ 
+}
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -105,6 +141,10 @@
       .search {
         margin-left: 30rem;
       }
+
+      tbody td:not(.deskripsi){
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -126,7 +166,7 @@
         </a>
         <a href="user.php" class="d-flex align-items-center gap-2">
           <i class="bi bi-folder-plus"></i>
-          Masukan TAK
+          Masukan Buku
         </a>
         <a href="riwayat.php" class="d-flex align-items-center gap-2">
           <i class="bi bi-journal-check"></i>
@@ -137,14 +177,15 @@
       <div class="content">
         <div class="d-flex">
           <h2 class="text-black text-start">Data Buku</h2>
-          <form class="d-flex mb-4 search" role="search">
+          <form class="d-flex mb-4 search" role="search" method="post">
             <input
               class="form-control me-2"
               type="search"
               placeholder="Search"
               aria-label="Search"
+              name="keyword"
             />
-            <button class="btn btn-outline-success" type="submit">
+            <button class="btn btn-outline-success" type="submit" name="cari">
               Search
             </button>
           </form>
@@ -163,58 +204,82 @@
                 <th>Aksi</th>
               </tr>
             </thead>
+            <?php foreach ($buku as $row) : ?> 
             <tbody class="isikolom border-bottom border-dark-subtle">
               <tr>
-                <td>1</td>
+                <td><?= $row["Id"]; ?> </td>
                 <td>
                   <img
-                    src="/img/logo.png"
+                    src="/MARACA/img/<?= $row["Gambar"]; ?>"
                     alt="Foto Buku"
                     class="rounded"
                     style="width: 100px; height: auto"
                   />
                 </td>
-                <td>Harry Potter</td>
-                <td>Harry Potter and the Philosopher's Stone</td>
-                <td>Fiksi</td>
-                <td>12</td>
-                <td>Buku tentang dunia sihir yang penuh petualangan.</td>
+                <td><?= $row["Penulis"]; ?></td>
+                <td><?= $row["Judul"]; ?></td>
+                <td><?= $row["Jenis"]; ?></td>
+                <td><?= $row["Ketersedian"]; ?></td>
+                <td class="deskripsi"><?= $row["Deskripsi"]; ?></td>
                 <td>
-                  <div class="d-flex mt-2">
-                    <button class="btn btn-sm btn-warning me-2">Ubah</button>
+                  <div class="">
+                    <button class="btn btn-sm btn-warning me-2" data-bs-toggle="modal" data-bs-target="#ubahModal"><a href="riwayat.php?Judul_buku=<?= $row["Id"]?>">Ubah</a></button>
+
                     <button class="btn btn-sm btn-danger">Hapus</button>
                   </div>
                 </td>
               </tr>
             </tbody>
-            <tbody class="isikolom">
-              <tr>
-                <td>1</td>
-                <td>
-                  <img
-                    src="/img/logo.png"
-                    alt="Foto Buku"
-                    class="rounded"
-                    style="width: 100px; height: auto"
-                  />
-                </td>
-                <td>Harry Potter</td>
-                <td>Harry Potter and the Philosopher's Stone</td>
-                <td>Fiksi</td>
-                <td>12</td>
-                <td>Buku tentang dunia sihir yang penuh petualangan.</td>
-                <td>
-                  <div class="d-flex mt-2">
-                    <button class="btn btn-sm btn-warning me-2">Ubah</button>
-                    <button class="btn btn-sm btn-danger">Hapus</button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
+            <?php endforeach ?>
           </table>
         </div>
       </div>
     </div>
+
+    <!-- Modal Ubah Buku -->
+<div class="modal fade" id="ubahModal" tabindex="-1" aria-labelledby="ubahModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ubahModalLabel">Ubah Data Buku</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Form Pengubahan Buku -->
+        <form id="ubahForm" action= "" method="POST">
+          <div class="mb-3">
+            <label for="judulBuku" class="form-label">Judul Buku</label>
+            <input type="text" class="form-control" id="judulBuku" name="judulBuku" required>
+          </div>
+          <div class="mb-3">
+            <label for="penulisBuku" class="form-label">Penulis</label>
+            <input type="text" class="form-control" id="penulisBuku" name="penulisBuku" required>
+          </div>
+          <div class="mb-3">
+            <label for="jenisBuku" class="form-label">Jenis Buku</label>
+            <input type="text" class="form-control" id="jenisBuku" name="jenisBuku" required>
+          </div>
+          <div class="mb-3">
+            <label for="stokBuku" class="form-label">Stok</label>
+            <input type="number" class="form-control" id="stokBuku" name="stokBuku" required>
+          </div>
+          <div class="mb-3">
+            <label for="deskripsiBuku" class="form-label">Deskripsi</label>
+            <textarea class="form-control" id="deskripsiBuku" name="Deskripsi" rows="3" required></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="gambarBuku" class="form-label">Gambar Buku</label>
+            <input type="file" class="form-control" id="gambarBuku" name="Gambar">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+            <button type="submit" name="submit" class="btn btn-primary">Simpan Perubahan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
     <script src="belajar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

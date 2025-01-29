@@ -59,4 +59,36 @@ function registrasi($data) {
 
       
     }
+  
+  function cari ($keyword) {
+    $query = "SELECT * FROM buku WHERE
+    Judul LIKE '%$keyword%' OR Jenis LIKE '%$keyword%' OR Penulis LIKE '%$keyword%' ";
+
+    return query($query);
+  }
+
+
+  function ubah ($data) {
+  global $db;
+
+  $judulbuku = htmlspecialchars ($data["judulBuku"]);
+  $jenisbuku = htmlspecialchars ($data["jenisBuku"]);
+  $penulis = htmlspecialchars ($data["penulisBuku"]);
+  $ketersedian = htmlspecialchars ($data["stokBuku"]);
+  $deskripsi = htmlspecialchars ($data["Deskripsi"]);
+  $gambar = htmlspecialchars ($data["Gambar"]);
+
+  $query = "UPDATE buku SET
+             Id = ,
+             Judul = '$judulbuku',
+              Penulis = '$penulis',
+             Jenis= '$jenisbuku',
+             Ketersedian = '$ketersedian',
+             Deskripsi = '$deskripsi'
+             Gambar = '$gambar'
+            ";
+  mysqli_query($db, $query);
+
+  return mysqli_affected_rows($db);
+  }
 ?>
