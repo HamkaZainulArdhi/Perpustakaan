@@ -61,6 +61,8 @@ function registrasi($data) {
     }
   
   function cari ($keyword) {
+    global $db;
+
     $query = "SELECT * FROM buku WHERE
     Judul LIKE '%$keyword%' OR Jenis LIKE '%$keyword%' OR Penulis LIKE '%$keyword%' ";
 
@@ -68,24 +70,28 @@ function registrasi($data) {
   }
 
 
+  
+
+
   function ubah ($data) {
   global $db;
 
+  $id = htmlspecialchars ($data["id"]);
   $judulbuku = htmlspecialchars ($data["judulBuku"]);
   $jenisbuku = htmlspecialchars ($data["jenisBuku"]);
   $penulis = htmlspecialchars ($data["penulisBuku"]);
-  $ketersedian = htmlspecialchars ($data["stokBuku"]);
+  $ketersedian = htmlspecialchars ($data["Ketersedian"]);
   $deskripsi = htmlspecialchars ($data["Deskripsi"]);
   $gambar = htmlspecialchars ($data["Gambar"]);
 
   $query = "UPDATE buku SET
-             Id = ,
              Judul = '$judulbuku',
-              Penulis = '$penulis',
+             Penulis = '$penulis',
              Jenis= '$jenisbuku',
              Ketersedian = '$ketersedian',
              Deskripsi = '$deskripsi'
              Gambar = '$gambar'
+             WHERE Id = $id
             ";
   mysqli_query($db, $query);
 

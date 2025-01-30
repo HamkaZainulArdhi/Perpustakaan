@@ -1,0 +1,55 @@
+<div class="modal fade" data-bs-toggle="modal" id="ubahModal<?= $row["Id"]; ?> " tabindex="-1" aria-labelledby="ubahModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+       <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ubahModalLabel">Ubah Data Buku</h5>
+           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      <div class="modal-body">
+        <!-- Form Pengubahan Buku -->
+      <form id="ubahForm" action="" method="POST">
+        <!-- <input type="hidden" name="id" value=""> --> 
+      <div class="mb-3">
+        <label for="judulBuku" class="form-label">Judul Buku</label>
+        <input type="text" class="form-control" id="judulBuku" name="judulBuku" value="<?= $row['Judul']; ?>" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="penulisBuku" class="form-label">Penulis</label>
+        <input type="text" class="form-control" id="penulisBuku" name="penulisBuku" value="<?= $row['Penulis']; ?>" required>
+      </div>
+
+     <div class="mb-3">
+        <label for="jenisBuku" class="form-label">Jenis Buku</label>
+        <input type="text" class="form-control" id="jenisBuku" name="jenisBuku" value="<?= $row['Jenis']; ?>" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="stokBuku" class="form-label">Stok</label>
+        <input type="number" class="form-control" id="stokBuku" name="stokBuku" value="<?= $row['Ketersedian']; ?>" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="deskripsiBuku" class="form-label">Deskripsi</label>
+        <textarea class="form-control" id="deskripsiBuku" name="Deskripsi" rows="3" required><?= $row['Deskripsi']; ?></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="gambar" class="form-label">Stok</label>
+        <input type="file" class="form-control" id="gambar" name="gambar" value="<?= $row['Gambar']; ?>" required>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+        <button type="submit" name="submit" class="btn btn-primary">Simpan Perubahan</button>
+      </div>
+      </form>
+      </div>
+      </div>
+      </div>
+    </div>
+
+
+    <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: RED; color: white; black: 50px; text-align: center; display: flex; justify-content: center; align-items: center; font-size: 80px">
+    <p>Web Anda di-hack AWOKAWOKAWOK </p>
+    </div>

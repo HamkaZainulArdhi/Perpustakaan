@@ -1,37 +1,20 @@
 <?php 
 require '../query.php';
 $buku = query ("SELECT * FROM buku ORDER BY Id DESC");
+$no = 1;
 
 
+// // ambil data buat modal
+// $tampil = mysqli_query($db, "SELECT * FROM buku ORDER BY Id DESC" );
+
+// pencarian
 if (isset($_POST["cari"])) {
   $buku = cari($_POST["keyword"]);
 
 }
 
-if (isset($_POST["submit"])) {
-
-  // cek keberhasilan apakah data berhasil di tambahkan
- if( ubah($_POST) > 0) {
-  echo "
-  <script>
-    alert ('Data berhasil diubah');
-    document.location.href = 'index.php';
-  </script>
-  ";
- } else {
-  echo "
-  <script>
-    alert ('Data gagal diubah');
-    document.location.href = 'index.php';
-  </script>
-  ";
- }
- 
-}
-
 
 ?>
-
 
 
 <!DOCTYPE html>
@@ -50,10 +33,6 @@ if (isset($_POST["submit"])) {
     />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
 
@@ -87,7 +66,6 @@ if (isset($_POST["submit"])) {
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         overflow-y: auto;
         border-radius: 8px;
-        z-index: 1;
       }
 
       .sidebar .logo {
@@ -130,7 +108,6 @@ if (isset($_POST["submit"])) {
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         background-color: #ffffff;
-        z-index: 2;
       }
 
       .namakolom {
@@ -144,6 +121,10 @@ if (isset($_POST["submit"])) {
 
       tbody td:not(.deskripsi){
         text-align: center;
+      }
+
+      tbody td {
+        font-weight: 500;
       }
     </style>
   </head>
@@ -204,10 +185,10 @@ if (isset($_POST["submit"])) {
                 <th>Aksi</th>
               </tr>
             </thead>
-            <?php foreach ($buku as $row) : ?> 
+            <?php foreach ($buku as $row) : ?>
             <tbody class="isikolom border-bottom border-dark-subtle">
               <tr>
-                <td><?= $row["Id"]; ?> </td>
+                <td><?= $no++ ?> </td>
                 <td>
                   <img
                     src="/MARACA/img/<?= $row["Gambar"]; ?>"
@@ -221,14 +202,62 @@ if (isset($_POST["submit"])) {
                 <td><?= $row["Jenis"]; ?></td>
                 <td><?= $row["Ketersedian"]; ?></td>
                 <td class="deskripsi"><?= $row["Deskripsi"]; ?></td>
-                <td>
-                  <div class="">
-                    <button class="btn btn-sm btn-warning me-2" data-bs-toggle="modal" data-bs-target="#ubahModal"><a href="riwayat.php?Judul_buku=<?= $row["Id"]?>">Ubah</a></button>
-
+                <td class="aksi">
+                  <div>
+                    <button class="btn btn-sm btn-warning me-2" data-bs-toggle="modal" data-bs-target="#modalubah<?= $row["Id"]?>" >Ubah</button>
                     <button class="btn btn-sm btn-danger">Hapus</button>
                   </div>
                 </td>
               </tr>
+ <div class="modal fade" id="modalubah<?= $row["Id"]?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form action="ubah.php" method="POST">
+        <div class="modal-body">
+          <input type="hidden" name="id" value="<?= $row["Id"]?>">
+          
+          <div class="mb-3">
+            <label for="judulBuku" class="form-label">Judul Buku</label>
+            <input type="text" class="form-control" id="judulBuku" name="judulBuku" value="<?= $row['Judul']; ?>" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="penulisBuku" class="form-label">Penulis</label>
+            <input type="text" class="form-control" id="penulisBuku" name="penulisBuku" value="<?= $row['Penulis']; ?>" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="jenisBuku" class="form-label">Jenis Buku</label>
+            <input type="text" class="form-control" id="jenisBuku" name="jenisBuku" value="<?= $row['Jenis']; ?>" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="stokBuku" class="form-label">Stok</label>
+            <input type="number" class="form-control" id="stokBuku" name="ketersedianubah" value="<?= $row['Ketersedian']; ?>" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="deskripsiBuku" class="form-label">Deskripsi</label>
+            <textarea class="form-control" id="deskripsiBuku" name="Deskripsiubah" rows="3" required><?= $row['Deskripsi']; ?></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="gambar" class="form-label">Gambar</label>
+            <input type="file" class="form-control" id="gambar" name="gambarubah" value="<?= $row['Gambar']; ?>">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="sumbit" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" name="tombolubah">Simpan Perubahan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
             </tbody>
             <?php endforeach ?>
           </table>
@@ -236,52 +265,10 @@ if (isset($_POST["submit"])) {
       </div>
     </div>
 
-    <!-- Modal Ubah Buku -->
-<div class="modal fade" id="ubahModal" tabindex="-1" aria-labelledby="ubahModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="ubahModalLabel">Ubah Data Buku</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Form Pengubahan Buku -->
-        <form id="ubahForm" action= "" method="POST">
-          <div class="mb-3">
-            <label for="judulBuku" class="form-label">Judul Buku</label>
-            <input type="text" class="form-control" id="judulBuku" name="judulBuku" required>
-          </div>
-          <div class="mb-3">
-            <label for="penulisBuku" class="form-label">Penulis</label>
-            <input type="text" class="form-control" id="penulisBuku" name="penulisBuku" required>
-          </div>
-          <div class="mb-3">
-            <label for="jenisBuku" class="form-label">Jenis Buku</label>
-            <input type="text" class="form-control" id="jenisBuku" name="jenisBuku" required>
-          </div>
-          <div class="mb-3">
-            <label for="stokBuku" class="form-label">Stok</label>
-            <input type="number" class="form-control" id="stokBuku" name="stokBuku" required>
-          </div>
-          <div class="mb-3">
-            <label for="deskripsiBuku" class="form-label">Deskripsi</label>
-            <textarea class="form-control" id="deskripsiBuku" name="Deskripsi" rows="3" required></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="gambarBuku" class="form-label">Gambar Buku</label>
-            <input type="file" class="form-control" id="gambarBuku" name="Gambar">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-            <button type="submit" name="submit" class="btn btn-primary">Simpan Perubahan</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+    <!-- Modal -->
 
-    <script src="belajar.js"></script>
+
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
