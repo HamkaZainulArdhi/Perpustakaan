@@ -73,28 +73,69 @@ function registrasi($data) {
   
 
 
-  function ubah ($data) {
-  global $db;
+  // function ubahaaa ($data) {
+  // global $db;
 
-  $id = htmlspecialchars ($data["id"]);
-  $judulbuku = htmlspecialchars ($data["judulBuku"]);
-  $jenisbuku = htmlspecialchars ($data["jenisBuku"]);
-  $penulis = htmlspecialchars ($data["penulisBuku"]);
-  $ketersedian = htmlspecialchars ($data["Ketersedian"]);
-  $deskripsi = htmlspecialchars ($data["Deskripsi"]);
-  $gambar = htmlspecialchars ($data["Gambar"]);
+  // $id = htmlspecialchars ($data["id"]);
+  // $judulbuku = htmlspecialchars ($data["judulBuku"]);
+  // $jenisbuku = htmlspecialchars ($data["jenisBuku"]);
+  // $penulis = htmlspecialchars ($data["penulisBuku"]);
+  // $ketersedian = htmlspecialchars ($data["Ketersedian"]);
+  // $deskripsi = htmlspecialchars ($data["Deskripsi"]);
+  // $gambar = htmlspecialchars ($data["Gambar"]);
 
-  $query = "UPDATE buku SET
-             Judul = '$judulbuku',
-             Penulis = '$penulis',
-             Jenis= '$jenisbuku',
-             Ketersedian = '$ketersedian',
-             Deskripsi = '$deskripsi'
-             Gambar = '$gambar'
-             WHERE Id = $id
-            ";
-  mysqli_query($db, $query);
+  // $query = "UPDATE buku SET
+  //            Judul = '$judulbuku',
+  //            Penulis = '$penulis',
+  //            Jenis= '$jenisbuku',
+  //            Ketersedian = '$ketersedian',
+  //            Deskripsi = '$deskripsi'
+  //            Gambar = '$gambar'
+  //            WHERE Id = $id
+  //           ";
+  // mysqli_query($db, $query);
 
-  return mysqli_affected_rows($db);
-  }
+  // return mysqli_affected_rows($db);
+  // }
+
+
+
+
+function ubah($data) {
+    global $db;
+
+    // Ambil dan escape data dari $_POST
+    $id = intval($data['id']);
+    $judul = mysqli_real_escape_string($db, $data['judulBuku']);
+    $penulis = mysqli_real_escape_string($db, $data['penulisBuku']);
+    $jenis = mysqli_real_escape_string($db, $data['jenisBuku']);
+    $ketersedian = mysqli_real_escape_string($db, $data['ketersedianubah']);
+    $deskripsi = mysqli_real_escape_string($db, $data['Deskripsiubah']);
+    $gambar = mysqli_real_escape_string($db, $data['gambarubah']);
+
+    // Query UPDATE
+    $query = "UPDATE buku SET
+              Judul = '$judul',
+              Penulis = '$penulis',
+              Jenis = '$jenis',
+              Ketersedian = '$ketersedian',
+              Deskripsi = '$deskripsi',
+              Gambar = '$gambar'
+              WHERE Id = $id";
+
+    // Eksekusi query
+    $ubah = mysqli_query($db, $query);
+
+    // Cek apakah query berhasil dijalankan
+    if (!$ubah) {
+        throw new mysqli_sql_exception(mysqli_error($db)); // Jika gagal, lempar exception
+    }
+
+    // Kembalikan jumlah baris yang terpengaruh
+    return mysqli_affected_rows($db);
+}
+     
+
+
+
 ?>

@@ -13,6 +13,15 @@ if (isset($_POST["cari"])) {
 
 }
 
+if (isset($_POST["tombolubah"])) {
+if (ubah($_POST) > 0) {
+    header('Location: riwayat.php?status=success'); // Redirect dengan status sukses
+    exit();
+} else {
+    header('Location: riwayat.php?status=error'); // Redirect dengan status error
+    exit();
+}
+}
 
 ?>
 
@@ -203,7 +212,7 @@ if (isset($_POST["cari"])) {
                 <td><?= $row["Ketersedian"]; ?></td>
                 <td class="deskripsi"><?= $row["Deskripsi"]; ?></td>
                 <td class="aksi">
-                  <div>
+                  <div class="d-flex">
                     <button class="btn btn-sm btn-warning me-2" data-bs-toggle="modal" data-bs-target="#modalubah<?= $row["Id"]?>" >Ubah</button>
                     <button class="btn btn-sm btn-danger">Hapus</button>
                   </div>
@@ -216,7 +225,7 @@ if (isset($_POST["cari"])) {
         <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form action="ubah.php" method="POST">
+      <form action="" method="POST">
         <div class="modal-body">
           <input type="hidden" name="id" value="<?= $row["Id"]?>">
           
@@ -266,9 +275,61 @@ if (isset($_POST["cari"])) {
     </div>
 
     <!-- Modal -->
+    <!-- Modal for Success -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel">Sukses</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Data berhasil diubah.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Tutup</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- Modal for Error -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="errorModalLabel">Gagal</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Data gagal diubah.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
 
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('status') === 'success') {
+        var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        successModal.show();
+
+        // Hapus parameter 'status' dari URL
+        history.replaceState({}, document.title, window.location.pathname);
+    } else if (urlParams.get('status') === 'error') {
+        var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+        errorModal.show();
+
+        // Hapus parameter 'status' dari URL
+        history.replaceState({}, document.title, window.location.pathname);
+    }
+});
+    </script>
   </body>
 </html>
