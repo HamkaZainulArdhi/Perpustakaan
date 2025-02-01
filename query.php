@@ -134,7 +134,13 @@ function ubah($data) {
     // Kembalikan jumlah baris yang terpengaruh
     return mysqli_affected_rows($db);
 }
-     
+
+function hapus($data) {
+    global $db;
+
+    mysqli_query($db, "DELETE FROM buku WHERE Id = $data");
+    return mysqli_affected_rows($db);
+}    
 
 
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 require '../query.php';
 $buku = query ("SELECT * FROM buku ORDER BY Id DESC");
 $no = 1;
@@ -22,6 +22,20 @@ if (ubah($_POST) > 0) {
     exit();
 }
 }
+
+
+if (isset($_POST["hapus"])) {
+    $id = $_POST["id"];
+    if (hapus($id) > 0) {
+        header('Location: riwayat.php?status=success'); // Redirect dengan status sukses
+        exit();
+    } else {
+        header('Location: riwayat.php?status=error'); // Redirect dengan status error
+        exit();
+    }
+}
+
+
 
 ?>
 
@@ -214,7 +228,10 @@ if (ubah($_POST) > 0) {
                 <td class="aksi">
                   <div class="d-flex">
                     <button class="btn btn-sm btn-warning me-2" data-bs-toggle="modal" data-bs-target="#modalubah<?= $row["Id"]?>" >Ubah</button>
-                    <button class="btn btn-sm btn-danger">Hapus</button>
+                    <form method="POST" action="">
+                      <input type="hidden" name="id" value="<?= $row["Id"]; ?>">
+                      <button type="submit" name="hapus" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');">Hapus</button>
+                    </form>
                   </div>
                 </td>
               </tr>
